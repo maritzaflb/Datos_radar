@@ -82,10 +82,7 @@ a<-as.vector(g_a)
 
 dato_fecha<-fecha_a%>% mutate(grupo_g=g,grupo_j=j,grupo_a=a)
 
-
-
-
-dato_fechaa<-dato_fecha[1:172,]
+dato_fechaa<-dato_fecha[1:(dim(dato_fecha)[1]-14),]
 
 dia<-as.character(dato_fechaa$fecha)
 dias_t<-as.Date(dia,format="%d/%m/%Y")
