@@ -10,13 +10,13 @@ casos<-as.data.frame(read.csv('DA_Radar_Casos.csv',header=T, sep=','))
 
 #TIPOPRUEBA
 
-casos<-rename(casos, fecha=Ô..FEC_INI_SIN, edad=EDAD, sexo=SEXO, paciente=TIPO_PACIENTE, resultado=RESULTADO_FINAL,municipio=CVE_MUN_RES,laboratorio=LABORATORIO, prueba=TIPOPRUEBA)
+casos<-rename(casos, fecha=√Ø..FEC_INI_SIN, edad=EDAD, sexo=SEXO, paciente=TIPO_PACIENTE, resultado=RESULTADO_FINAL,municipio=CVE_MUN_RES,laboratorio=LABORATORIO, prueba=TIPOPRUEBA)
 caso<-casos[1:(dim(casos)[1])-1,]
 #ORDENO POR FECHA
 #total de casos confirmados entre ambulatorios y hospitalizados 
 confirmado<-caso %>% filter(resultado=='CONFIRMADO')
 
-#contar cu·ntos de los pcr fueron ambulatorios y cu·ntos de serologicos
+#contar cu√°ntos de los pcr fueron ambulatorios y cu√°ntos de serologicos
 
 #ambulatorios
 pcr_a<-confirmado %>% filter(paciente=='AMBULATORIO') 
@@ -42,7 +42,7 @@ g_a<-NULL
 for(j in 1:length(array_fecha))
 {
 	conjunto<-pcra%>% filter(fecha==array_fecha[j])
-	#aqui voy a contar cu·ntos hay de cada edad en esas fechas
+	#aqui voy a contar cu√°ntos hay de cada edad en esas fechas
 	fechac<-conjunto%>%  
 	dplyr::group_by(edad) %>%  
 	dplyr::summarise(edad_n=n())
@@ -96,7 +96,7 @@ ggplot(data= dato_fechaa) +
  geom_point(aes(x =dias_t , y =as.numeric(grupo_g),colour='Mayores de 60',shape='Mayores de 60'),color = 'blue')+ geom_line(aes(x =dias_t , y =as.numeric(grupo_g)),color = 'blue')  + xlab('Fecha de registro')+
  geom_point(aes(x =dias_t , y =as.numeric(grupo_j),colour='De 59 a 30',shape='De 59 a 30'),color = 'red')+ geom_line(aes(x =dias_t , y =as.numeric(grupo_j)),color = 'red')  + xlab('Fecha de registro')+
  geom_point(aes(x =dias_t , y =as.numeric(grupo_a),colour='De 29 a 0',shape='De 29 a 0'),color = 'black')+ geom_line(aes(x =dias_t , y =as.numeric(grupo_a)),color = 'black')  + xlab('Fecha de registro')+
-  ylab('N˙mero de casos') +  labs(title = "Ambulatorios confirmados de covid-19 por grupos de edad en Jalisco (07/09/2020)")+
+  ylab('N√∫mero de casos') +  labs(title = "Ambulatorios confirmados de covid-19 por grupos de edad en Jalisco (07/09/2020)")+
 theme_bw()
 
 
@@ -106,7 +106,7 @@ theme_bw()
 #total de casos confirmados entre ambulatorios y hospitalizados 
 confirmado_h<-caso %>% filter(resultado=='CONFIRMADO')
 
-#contar cu·ntos de los pcr fueron ambulatorios y cu·ntos de serologicos
+#contar cu√°ntos de los pcr fueron ambulatorios y cu√°ntos de serologicos
 
 #ambulatorios
 pcr_h<-confirmado_h %>% filter(paciente=='HOSPITALIZADO') 
@@ -129,10 +129,10 @@ g_g_h<-NULL
 g_j_h<-NULL
 g_a_h<-NULL
 #aqui voy a meter un for para correr el arreglo
-for(j in 1:167)
+for(j in 1:length(array_fecha_h))
 {
 	conjunto_h<-pcrh%>% filter(fecha==array_fecha_h[j])
-	#aqui voy a contar cu·ntos hay de cada edad en esas fechas
+	#aqui voy a contar cu√°ntos hay de cada edad en esas fechas
 	fec<-conjunto_h%>%  
 	dplyr::group_by(edad) %>%  
 	dplyr::summarise(edad_n_h=n())
@@ -181,7 +181,7 @@ ggplot(data= dato_fecha_h) +
  geom_point(aes(x =dias_t_h , y =as.numeric(grupo_g_h),colour='Mayores de 60',shape='Mayores de 60'),color = 'blue')+ geom_line(aes(x =dias_t_h , y =as.numeric(grupo_g_h)),color = 'blue')  + xlab('Fecha de registro')+
  geom_point(aes(x =dias_t_h , y =as.numeric(grupo_j_h),colour='De 59 a 30',shape='De 59 a 30'),color = 'red')+ geom_line(aes(x =dias_t_h , y =as.numeric(grupo_j_h)),color = 'red')  + xlab('Fecha de registro')+
  geom_point(aes(x =dias_t_h , y =as.numeric(grupo_a_h),colour='De 29 a 0',shape='De 29 a 0'),color = 'black')+ geom_line(aes(x =dias_t_h , y =as.numeric(grupo_a_h)),color = 'black')  + xlab('Fecha de registro')+
-  ylab('N˙mero de casos') +  labs(title = "Hospitalizados confirmados de covid-19 por grupos de edad en Jalisco (07/09/2020)")+
+  ylab('N√∫mero de casos') +  labs(title = "Hospitalizados confirmados de covid-19 por grupos de edad en Jalisco (07/09/2020)")+
 theme_bw()
 
 
