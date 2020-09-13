@@ -4,7 +4,7 @@ library(ggplot2)
 library(scales) 
 library(stringr)
 
-#función para quitar la comas en los datos númericos
+#funciÃ³n para quitar la comas en los datos nÃºmericos
 comas<-function(x)
 {
 numero<-matrix(0,length(x),1)
@@ -32,10 +32,10 @@ for(i in 1:length(x))
 x<-numero
 }
 
-#importo los datos como un dataset
+#importo los datos como un dataframe
 datos<-as.data.frame(read.csv('DA_Radar_Pruebas.csv',header=T, sep=','))
 datos<-datos[1:(dim(datos)[1]-1),]
-datos2<-rename(datos, fecha=ï..Fecha,UG=U.de.G, serologica =SerolÃ³gicas)
+datos2<-rename(datos, fecha=Ã¯..Fecha,UG=U.de.G, serologica =SerolÃƒÂ³gicas)
 
 glimpse(datos2)
 
@@ -70,7 +70,7 @@ glimpse(datos2)
 
 anticuerpos<- datos2 %>% filter(Resultado=='Confirmados') 
 
-#También filtro descartados
+#TambiÃ©n filtro descartados
 anticuerpos_negativos<- datos2 %>% filter(Resultado=='Descartados') 
 
 #filtro sospechosos
@@ -95,14 +95,14 @@ ggplot(data = union) +
   geom_point(aes(x =dias , y =as.numeric(serologica),colour='Confirmados',shape='Confirmados'),color = 'blue')+geom_line(aes(x =dias , y =as.numeric(serologica),colour='Confirmados'),color = 'black', size = 1)+ 
  geom_point(aes(x =dias , y =as.numeric(sero_neg),colour='Negativos', shape='Negativos'),color = 'black')+geom_line(aes(x =dias , y =as.numeric(sero_neg),colour='Negativos'),color = 'blue', size = 1)+
   scale_colour_manual("",breaks = c('Confirmados', 'Descartados'),values = c('black','blue'))+
-  ylab('Número de casos') +  labs(title = "Pruebas serológicas confirmadas y descartadas al 03/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
+  ylab('NÃºmero de casos') +  labs(title = "Pruebas serolÃ³gicas confirmadas y descartadas al 03/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
 theme_bw()
 
 #win.graph()
 #se grafican por fecha
 #ggplot(data = serologicas2) +
 # geom_point(color = 'slateblue', size = 2, alpha = 0.6)+ geom_smooth(color = 'red')+xlab('Fecha') + 
-#  ylab('Resultado por fecha') +  labs(title = "Pruebas serológicas por día")+scale_x_date(labels = date_format("%d/%m/%Y"))+
+#  ylab('Resultado por fecha') +  labs(title = "Pruebas serolÃ³gicas por dÃ­a")+scale_x_date(labels = date_format("%d/%m/%Y"))+
 #theme_bw()
 
 
@@ -151,7 +151,7 @@ dias_t<-as.Date(dia,format="%d/%m/%Y")
 win.graph()
 ggplot(data = tasa_s,aes(x =dias_t , y =acumulado )) +
  geom_point(color = 'blue')+ geom_line(color = 'blue')  + 
-  ylab('Tasa por fecha') +  labs(title = "Tasa de pruebas serológicas por fecha de reporte al 07/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
+  ylab('Tasa por fecha') +  labs(title = "Tasa de pruebas serolÃ³gicas por fecha de reporte al 07/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
 theme_bw()
 
 
