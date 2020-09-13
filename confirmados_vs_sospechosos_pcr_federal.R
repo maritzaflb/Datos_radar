@@ -32,7 +32,7 @@ for(i in 1:length(x))
 x<-numero
 }
 
-#importo los datos como un dataset
+#importo los datos como un dataframe
 datos<-as.data.frame(read.csv('DA_Radar_Pruebas.csv',header=T, sep=','))
 datos<-datos[1:432,]
 datos2<-rename(datos,fecha=ï..Fecha,UG=U.de.G, serologica =SerolÃ³gicas)
@@ -49,13 +49,6 @@ datos2$Federal[datos2$Federal=="Na"]<-0
 datos2$serologica[datos2$serologica=="Na"]<-0
 datos2$UG[datos2$UG=="Na"]<-0
 datos2$Privado[datos2$Privado=="Na"]<-0
-
-
-########################################################################################################################
-####En esta parte aún me falta crear la función para generalizar la automatización de la lectura de los datos con coma##
-##quitar las comas en los campos de caracter                                                                          ##
-########################################################################################################################
-
 
 datos2$serologica<-comas(datos2$serologica)
 
@@ -75,13 +68,6 @@ glimpse(datos2)
 #CASOS CONFIRMADOS
 
 pcr<- datos2 %>% filter(Resultado=='Confirmados') 
-
-##en esta parte voy a sumar toda la parte de las muestras pcr
-#Tengo que hacer dos cosas sumas todos los positivos por día y 
-#posteriormente hacer la suma de confirmados, descartados y sospechosos, para el final hacer 
-#la tasa de confirmación y/o positividad
-
-#
 
 #suma de cada fecha para positivos PCR
 total_positivos<- mutate(pcr, suma_positivos=as.numeric(pcr$Privado)+as.numeric(pcr$Federal)+as.numeric(pcr$UG)) 
