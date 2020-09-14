@@ -1,10 +1,10 @@
-#Tasa de confirmación total de todos los PCR
+#Tasa de confirmaciÃ³n total de todos los PCR
 library("dplyr")
 library("tidyr")
 library(ggplot2)
 library(scales) 
 library(stringr)
-#función para quitar la comas en los datos númericos
+#funciÃ³n para quitar la comas en los datos nÃºmericos
 comas<-function(x)
 {
 numero<-matrix(0,length(x),1)
@@ -35,7 +35,7 @@ x<-numero
 #importo los datos como un dataset
 datos<-as.data.frame(read.csv('DA_Radar_Pruebas.csv',header=T, sep=','))
 datos<-datos[1:432,]
-datos2<-rename(datos,fecha=ï..Fecha,UG=U.de.G, serologica =SerolÃ³gicas)
+datos2<-rename(datos,fecha=Ã¯..Fecha,UG=U.de.G, serologica =SerolÃƒÂ³gicas)
 
 glimpse(datos2)
 
@@ -51,10 +51,7 @@ datos2$UG[datos2$UG=="Na"]<-0
 datos2$Privado[datos2$Privado=="Na"]<-0
 
 
-########################################################################################################################
-####En esta parte aún me falta crear la función para generalizar la automatización de la lectura de los datos con coma##
-##quitar las comas en los campos de caracter                                                                          ##
-########################################################################################################################
+
 
 
 datos2$serologica<-comas(datos2$serologica)
@@ -87,11 +84,11 @@ dias<-as.Date(u,format="%d/%m/%Y")
 ggplot(data = total_positivos) +
   geom_point(aes(x =dias , y =as.numeric(suma_positivos),colour='Confirmados',shape='Confirmados'),color = 'blue')+geom_line(aes(x =dias , y =as.numeric(suma_positivos),colour='Confirmados'),color = 'black', size = 1)+xlab('Fecha reportada') + 
    scale_colour_manual("",breaks = c('Confirmados'),values = c('black'))+
-  ylab('Número de casos') +  labs(title = "Pruebas PCR confirmadas (Federal, UG y Privado) al 03/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
+  ylab('NÃºmero de casos') +  labs(title = "Pruebas PCR confirmadas (Federal, UG y Privado) al 03/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
 theme_bw()
 
 
-#aquí haré la suma acumulada de los tres PCR's confirmados y descartados
+
 
 #creo una nueva de descartados
 pcr_descartados<-datos2%>%filter(Resultado=='Descartados')
@@ -116,6 +113,6 @@ win.graph()
 ggplot(data = total) +
   geom_point(aes(x =dias , y =as.numeric(tasa),colour='Confirmados',shape='Confirmados'),color = 'blue')+geom_line(aes(x =dias , y =as.numeric(tasa),colour='Confirmados'),color = 'black', size = 1)+xlab('Fecha reportada')+
   scale_colour_manual("",breaks = c('Confirmados'),values = c('blue'))+
-  ylab('Número de casos') +  labs(title = "Tasa de PCR al 07/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
+  ylab('NÃºmero de casos') +  labs(title = "Tasa de PCR al 07/09/2020")+scale_x_date(labels = date_format("%d/%m/%Y"))+
 theme_bw()
 
